@@ -4,6 +4,7 @@ const express = require('express');
 const registrationController = require('./controller/registrationController');
 const loginController = require('./controller/loginController');
 const userPreferenceController = require('./controller/userPreferenceController');
+const newsController = require('./controller/newsController');
 const authJWT = require('./middlewares/authJWT');
 const { default: mongoose } = require('mongoose');
 
@@ -25,6 +26,7 @@ app.get('/',(req, res)=>{
 app.use('/register', registrationController);
 app.use('/login', loginController);
 app.use('/user-preference', authJWT.authenticateJWT, userPreferenceController);
+app.use('/news', authJWT.authenticateJWT, newsController);
 
 //global exception handler 
 app.use((error, req, res, next) => {
